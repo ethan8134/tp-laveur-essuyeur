@@ -1,0 +1,11 @@
+Question 1 : Y a-t-il des incohérences - doublon de numéro d'assiette ; nombre d'assiettes incohérent ? Regarder dans le code et expliquer comment la classe Assiette est préservée des incohérences entre threads.
+
+Note : le fait que les assiettes ne sont pas numérotées dans l'ordre n'est pas une incohérence, c'est le temps aléatoire passé au lavage qui peut créer un décalage entre threads.
+
+Il n'y a pas d'incohérences car pas de doublons et nombre cohérents d'assiettes.
+
+Le synchronized(this) impose que pendant qu’un thread est en train de créer une assiette, aucun autre thread ne peut entrer dans ce bloc pour le même objet.
+
+Question 2 : Expliquer pourquoi le thread représentant l'essuyeur ne peut prendre d'assiette dans la pile.
+
+Il faut synchroniser aussi push(), en utilisant isFull() pour gérer l’attente lorsque la pile est trop haute, et notifyAll() pour réveiller les essuyeurs. Cela empêche tout interblocage et assure une gestion correcte des threads.
